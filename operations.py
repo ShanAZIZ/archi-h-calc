@@ -1,38 +1,39 @@
-def increment_addition(numbers):
+def addition(number1, number2):
+    return number1 + number2
+
+def multiplication(number1, number2):
+    return number1 * number2
+
+operations = {
+    "+": {
+        "end_display": "addition",
+        "op_function": addition,
+    },
+    "*": {
+        "end_display": "mulitplication",
+        "op_function": multiplication
+    }
+}
+
+def operate(numbers, operation):
     print(tabulated_string(numbers[0]))
     final = numbers[0]
     for number in numbers[1:]:
-        final = final + number
-        display = tabulated_string(f"+{number} (={final})")
+        final = operations[operation]["op_function"](final, number)
+        display = operation_line_display(operation, number, final)
         print(display)
-        last_lenght = len(display)
+        print(end_bar(len(display)))
+    print(f"total = {final} ({operations[operation]["end_display"]})")
+
+def operation_line_display(operation, number, final):
+    return tabulated_string(f"{operation}{number} (={final})")
+
+def end_bar(lenght):
     end_bar = ""
-    for i in range(last_lenght):
+    for i in range(lenght):
         end_bar += "-"
-    print(tabulated_string(end_bar))
-    print(f"total = {final} (addition)")
+    return tabulated_string(end_bar)
 
-
-def increment_multiplication(numbers):
-    print(tabulated_string(numbers[0]))
-    final = numbers[0]
-    for number in numbers[1:]:
-        final = final * number
-        display = tabulated_string(f"*{number} (={final})")
-        print(display)
-        last_lenght = len(display)
-    end_bar = ""
-    for i in range(last_lenght):
-        end_bar += "-"
-    print(tabulated_string(end_bar))
-    print(f"total = {final} (multiplication)")
-
-def output(numbers, operation):
-    match operation:
-        case "+":
-            increment_addition(numbers)
-        case "*":
-            increment_multiplication(numbers)
 
 def tabulated_string(string):
     return f"\t{string}"
