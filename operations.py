@@ -16,14 +16,16 @@ operations = {
 }
 
 def operate(numbers, operation):
-    print(tabulated_string(numbers[0]))
+    output = ""
+    output += tabulated_string(numbers[0])
     final = numbers[0]
     for number in numbers[1:]:
         final = operations[operation]["op_function"](final, number)
         display = operation_line_display(operation, number, final)
-        print(display)
-        print(end_bar(len(display)))
-    print(f"total = {final} ({operations[operation]["end_display"]})")
+        output += display
+    output += end_bar(len(display))
+    output += f"total = {final} ({operations[operation]["end_display"]})"
+    return output
 
 def operation_line_display(operation, number, final):
     return tabulated_string(f"{operation}{number} (={final})")
@@ -36,4 +38,4 @@ def end_bar(lenght):
 
 
 def tabulated_string(string):
-    return f"\t{string}"
+    return f"\t{string}\n"

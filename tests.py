@@ -1,20 +1,22 @@
-# import unittest
+import unittest
 
-# class TestStringMethods(unittest.TestCase):
+from operations import operate
 
-#     def test_upper(self):
-#         self.assertEqual('foo'.upper(), 'FOO')
+class TestStringMethods(unittest.TestCase):
 
-#     def test_isupper(self):
-#         self.assertTrue('FOO'.isupper())
-#         self.assertFalse('Foo'.isupper())
+    def test_operate(self):
+        out = """    1
+        *2 (=2)
+        *4 (=8)
+        *5 (=40)
+        *3 (=120)
+        -----------
+total = 120 (mulitplication)"""
 
-#     def test_split(self):
-#         s = 'hello world'
-#         self.assertEqual(s.split(), ['hello', 'world'])
-#         # check that s.split fails when the separator is not a string
-#         with self.assertRaises(TypeError):
-#             s.split(2)
+        exp = operate([1, 2, 4, 5, 3], "*")
+        self.assertEqual(out, exp)
 
-# if __name__ == '__test__':
-#     unittest.main()
+
+    
+if __name__ == '__tests__':
+    unittest.main()
